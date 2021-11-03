@@ -257,6 +257,129 @@ files:
         }
     );
   learner_created: false
+- name: src/listeners.js
+  visible: true
+  text: |
+    const inputTask = document.getElementById('input-task');
+    const addTaskBtn = document.getElementById('add-task-button');
+    const taskList = document.getElementById('task-list');
+    let deleteBtnCollection = document.getElementsByClassName('delete-btn');
+    let completedCbxCollection = document.getElementsByClassName('completed');
+
+    const addOnClickListenerDeleteBtn = (deleteBtn) => deleteBtn
+        .addEventListener('click', () => taskList.removeChild(deleteBtn.parentElement));
+
+    for (let deleteBtn of deleteBtnCollection) {
+        addOnClickListenerDeleteBtn(deleteBtn);
+    }
+
+    const addOnClickListenerCompleteCheckbox = (completedCbx) => completedCbx.addEventListener(
+        'change',
+        () => completedCbx.parentElement.parentElement
+            .getElementsByClassName('task')[0]
+            .setAttribute('style', `text-decoration: ${completedCbx.checked ? 'line-through' : 'initial'}`)
+    );
+
+    for (let completedCbx of completedCbxCollection) {
+        addOnClickListenerCompleteCheckbox(completedCbx);
+    }
+
+    addTaskBtn.addEventListener('click', (ev) => {
+        const taskText = inputTask.value;
+        if (taskText.trim().length > 0) {
+            const label = document.createElement('label');
+            const completedCbx = document.createElement('input');
+            completedCbx.setAttribute('type', 'checkbox');
+            completedCbx.setAttribute('class', 'completed');
+            label.appendChild(completedCbx);
+            addOnClickListenerCompleteCheckbox(completedCbx)
+
+            const span = document.createElement('span');
+            span.setAttribute('class', 'task');
+            const spanText = document.createTextNode(taskText);
+            span.appendChild(spanText);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class', 'delete-btn');
+            const btnText = document.createTextNode('DELETE');
+            deleteBtn.appendChild(btnText);
+            addOnClickListenerDeleteBtn(deleteBtn);
+
+            const li = document.createElement('li');
+            li.appendChild(label);
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+
+            inputTask.value = '';
+        }
+    })
+  learner_created: true
+- name: src/style.css
+  visible: true
+  text: |-
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        width: 90px;
+    }
+
+    main {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        /*background-color: lightgray;*/
+    }
+
+    #add-task-panel {
+        display: flex;
+        width: 100%;
+        /*background-color: lightsalmon;*/
+    }
+
+    #input-task {
+        flex: 5 1 auto;
+        outline: 0;
+        border-width: 0 0 2px;
+        border-color: dimgray;
+        margin-right: 5px;
+    }
+
+    #add-task-button {
+        flex: 0 1 auto;
+    }
+
+    ul {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-flow: column;
+        /*background-color: darkgreen;*/
+    }
+
+    li {
+        flex: 1 1 auto;
+        display: flex;
+        width: 100%;
+    }
+
+    span {
+        flex: 1 1 auto;
+    }
+
+    .delete-btn {
+        /*background-image: url('./resources/delete-1-icon.png');*/
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/183/stages/930/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Wed, 03 Nov 2021 22:01:45 UTC
 record: -1
