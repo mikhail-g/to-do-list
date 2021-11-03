@@ -67,6 +67,111 @@ async function stageTest() {
             }
 
             return hs.correct();
+        },
+
+        // Test #4 - Test adding new task
+        () => {
+
+            const inputField = document.getElementById("input-task")
+            if (inputField.tagName !== 'INPUT')
+                return hs.wrong("Can't find input field with id '#input-task'")
+
+            inputField.value = "New task for the test purpose"
+
+            const addButton = document.getElementById("add-task-button")
+            if (addButton.tagName !== 'BUTTON')
+                return hs.wrong("Can't find button with id '#add-task-button'")
+
+            addButton.click()
+
+            const tasks = this.taskList.getElementsByTagName("li")
+            if (tasks.length !== 4)
+                return hs.wrong("After adding a new task to the To-Do list, there should be 4 <li> tags inside the <ul> list")
+
+            for (let task of tasks) {
+
+                const taskName = task.querySelector("span.task")
+                if (taskName === null)
+                    return hs.wrong("Inside each <li> tag should one <spane> tag with 'task' class")
+
+                if (taskName.textContent === "New task for the test purpose") {
+                    return hs.correct()
+                }
+            }
+
+            return hs.wrong("Can't find task with name 'New task for the test purpose'.\n" +
+                "The task name should be placed in <span> tag with class 'task'!")
+        },
+
+        // Test #5 - Deleting task
+        () => {
+
+            let tasks = this.taskList.getElementsByTagName("li")
+
+            for (let task of tasks) {
+                const taskName = task.querySelector("span.task")
+                if (taskName === null)
+                    return hs.wrong("Inside each <li> tag should one <spane> tag with 'task' class")
+
+                if (taskName.textContent === "New task for the test purpose") {
+                    const deleteButton = task.querySelector("button.delete-btn")
+                    if (deleteButton === null)
+                        return hs.wrong("Inside each <li> tag should one <button> tag with 'delete-btn' class")
+                    deleteButton.click()
+                    break
+                }
+            }
+
+            tasks = this.taskList.getElementsByTagName("li")
+
+            for (let task of tasks) {
+                const taskName = task.querySelector("span.task")
+                if (taskName === null)
+                    return hs.wrong("Inside each <li> tag should one <span> tag with 'task' class")
+
+                if (taskName.textContent === "New task for the test purpose") {
+                    return hs.wrong("After deleting a task with name 'New task for the test purpose' it is still in the task list!")
+                }
+            }
+
+            return hs.correct()
+        },
+
+        // Test #6 - Check completed tasks
+        async () => {
+
+            const tasks = this.taskList.getElementsByTagName("li")
+
+            if (tasks.length !== 3)
+                return hs.wrong("After adding a new task to the To-Do list, there should be 3 <li> tags inside the <ul> list")
+
+            const task = tasks[1]
+
+            const checkbox = task.querySelector("input[type=checkbox]")
+
+            if (checkbox.checked) {
+                return hs.wrong("By default a checkbox should be unchecked!")
+            }
+
+            checkbox.click()
+
+            let taskName = task.querySelector("span.task")
+            if (taskName === null)
+                return hs.wrong("Inside each <li> tag should be one <span> tag with 'task' class")
+
+            if (!window.getComputedStyle(taskName).textDecoration.includes("line-through")) {
+                return hs.wrong("If checkbox is checked the task name should be crossed out.\n" +
+                    "The span tag with task name should have 'text-decoration: line-through' style")
+            }
+
+            checkbox.click()
+
+            if (window.getComputedStyle(taskName).textDecoration.includes("line-through")) {
+                return hs.wrong("If checkbox is unchecked the task name shouldn't be crossed out.\n" +
+                    "The span tag with task name shouldn't have 'text-decoration: line-through' style")
+            }
+
+            return hs.correct()
         }
     );
 

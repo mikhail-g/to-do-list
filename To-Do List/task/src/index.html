@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href='./style.css'>
     <meta charset="UTF-8">
     <title>To-Do List</title>
 </head>
@@ -9,32 +11,33 @@
     <h1>To-Do List</h1>
     <section id="add-task-panel">
         <label for="input-task"></label>
-        <input id="input-task">
+        <input id="input-task" placeholder="type your new task here">
         <button id="add-task-button">ADD TASK</button>
     </section>
     <ul id="task-list">
         <li>
             <label>
-                <input type="checkbox">
+                <input class="completed" type="checkbox">
             </label>
             <span class="task">Wake up</span>
-            <button class="delete-btn"></button>
+            <button class="delete-btn">DELETE</button>
         </li>
         <li>
             <label>
-                <input type="checkbox">
+                <input class="completed" type="checkbox">
             </label>
             <span class="task">Eat something</span>
-            <button class="delete-btn"></button>
+            <button class="delete-btn">DELETE</button>
         </li>
         <li>
             <label>
-                <input type="checkbox">
+                <input class="completed" type="checkbox">
             </label>
             <span class="task">Go to sleep</span>
-            <button class="delete-btn"></button>
+            <button class="delete-btn">DELETE</button>
         </li>
     </ul>
 </main>
+<script src="listeners.js"></script>
 </body>
 </html>

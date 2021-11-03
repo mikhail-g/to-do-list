@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    width: 90px;
+}
+
+main {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    /*background-color: lightgray;*/
+}
+
+#add-task-panel {
+    display: flex;
+    width: 100%;
+    /*background-color: lightsalmon;*/
+}
+
+#input-task {
+    flex: 5 1 auto;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: dimgray;
+    margin-right: 5px;
+}
+
+#add-task-button {
+    flex: 0 1 auto;
+}
+
+ul {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    /*background-color: darkgreen;*/
+}
+
+li {
+    flex: 1 1 auto;
+    display: flex;
+    width: 100%;
+}
+
+span {
+    flex: 1 1 auto;
+}
+
+.delete-btn {
+    /*background-image: url('./resources/delete-1-icon.png');*/
+}

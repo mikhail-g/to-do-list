@@ -171,6 +171,19 @@ files:
         }
     );
   learner_created: false
+- name: src/style.css
+  visible: true
+  text: |-
+    .delete-btn {
+        /*background-image: url('./resources/delete-1-icon.png');*/
+    }
+  learner_created: true
+- name: src/listeners.js
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/183/stages/928/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 03 Nov 2021 10:52:37 UTC
+record: 2
